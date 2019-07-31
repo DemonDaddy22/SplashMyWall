@@ -11,3 +11,8 @@ img = data["urls"]["full"]
 name = data["alt_description"].replace(" ", "-")
 urllib.request.urlretrieve(img, name + '.jpg')
 # print(data["urls"])
+
+path = "D:/College Stuff/Python/Lab/Projects/unsplash/crescent-moon-illustration.jpg"
+SPI_SETDESKWALLPAPER = 20
+
+ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, path, 0)
