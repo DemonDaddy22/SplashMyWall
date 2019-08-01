@@ -13,8 +13,8 @@ class SlideShow:
     __images = []
     __time = 0
 
-    def getImages(self, count, time, query):
-        self.__time = time
+    def getImages(self, count, pause, query):
+        self.__time = pause
         sObj = SaveImages()
         sObj.setImages(count, query)
         sObj.makeNewFolder()
@@ -43,8 +43,29 @@ if __name__ == "__main__":
         time.sleep(0.5)
         print("> Welcome to SplashMyWall")
         time.sleep(0.5)
+        count = int(input("> Enter the number of images you want (1-30): "))
+        time.sleep(0.5)
+        query = input("> Enter a valid category of photos you want: ")
+        time.sleep(0.5)
+        pause = int(input("> Enter the time delay in seconds for slideshow: "))
+
+        if count <= 0:
+            time.sleep(0.5)
+            print("> Sorry but we need something for the slideshow")
+            time.sleep(0.25)
+            print("> Getting 3 pictures from", query, "category for the slideshow")
+        elif count > 30:
+            count = 30
+            print("> Sorry we can fetch only 30 photos at once")
+            time.sleep(0.25)
+            print("> Getting 30 pictures from", query, "category for the slideshow")
+        else:
+            time.sleep(0.25)
+            print("> Getting", count, "pictures from", query, "category for the slideshow")
+
+        time.sleep(0.25)
         slide = SlideShow()
-        slide.getImages(5, 10, "nature")
+        slide.getImages(count, pause, query)
         slide.createSlideShow()
     except KeyboardInterrupt:
         print ("> Program ended successfully")

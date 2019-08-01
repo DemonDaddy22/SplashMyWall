@@ -24,7 +24,22 @@ class Images:
         try:
             response = requests.get(self.__url)
             data = response.json()
+            
+            if ("errors" in data):
+                print("> Alas no photos found for", self.__query)
+                time.sleep(0.25)
+                print("> Getting photos from Nature category instead")
+                time.sleep(0.25)
+                self.__url = "{}&count={}&query=nature&client_id={}".format(self.__base_url, self.__count, self.__key)
+                response = requests.get(self.__url)
+                data = response.json()
+
+            if len(data) < self.__count:
+                print("> Only", len(data), "photos found for", self.__query)
+                time.sleep(0.25)
+
             return data
+
         except Exception as e:
             print(e)
             return []
