@@ -1,9 +1,7 @@
 # necessary libraries
 import os
 import time
-import ctypes
 import requests
-import urllib.request
 
 class Images:
     __images = []
@@ -16,11 +14,13 @@ class Images:
     def __init__(self, count, query):
         self.__count = count
         self.__query = query
+        # setting up the API url to get requested images
         self.__url += "{}&count={}&query={}&client_id={}".format(self.__base_url, self.__count, self.__query, self.__key)
-        print(self.__url)
+        # print(self.__url)
 
     @staticmethod
     def __response(self):
+        # getting the response from Unsplash API
         response = requests.get(self.__url)
         data = response.json()
         return data
