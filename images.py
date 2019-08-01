@@ -21,9 +21,13 @@ class Images:
     @staticmethod
     def __response(self):
         # getting the response from Unsplash API
-        response = requests.get(self.__url)
-        data = response.json()
-        return data
+        try:
+            response = requests.get(self.__url)
+            data = response.json()
+            return data
+        except Exception as e:
+            print(e)
+            return []
 
     @property
     def getImages(self):
@@ -32,7 +36,7 @@ class Images:
         for item in data:
             img_url = item["urls"]["full"]
             if (item["alt_description"] is not None):
-                name = item["alt_description"]
+                name = item["alt_description"].replace(" ", "-")
             else:
                 name = item["id"]
             self.__images.append({"img_url": img_url, "name": name})
