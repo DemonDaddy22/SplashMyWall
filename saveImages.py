@@ -1,7 +1,6 @@
 # necessary libraries
 import os
 import time
-import ctypes
 import urllib.request
 from datetime import datetime
 
@@ -14,9 +13,12 @@ class SaveImages:
     __query = ""
     __path = ""
 
+    def getFolderPath(self):
+        return self.__path
+
     def setImages(self, count, query):
         iObj = Images(count, query)
-        self.__images = iObj.getImages
+        self.__images = iObj.fetchImages
         self.__query = query
 
     def makeNewFolder(self):
@@ -29,9 +31,9 @@ class SaveImages:
             try:
                 os.mkdir(self.__path)
             except OSError:
-                print("Creation of the folder {} failed".format(self.__path))
+                print("> Creation of the folder {} failed".format(self.__path))
             else:
-                print("Successfully created {}".format(self.__path))
+                print("> Successfully created {}".format(self.__path))
 
         time.sleep(1)
         self.downloadImages()
@@ -40,7 +42,9 @@ class SaveImages:
         images = self.__images
         for img in images:
             urllib.request.urlretrieve(img["img_url"], self.__path + '/' + img["name"] + '.jpg')
+        print("> Images downloaded successfully")
+        time.sleep(0.5)
 
-s = SaveImages()
-s.setImages(5, "nature")
-s.makeNewFolder()
+# s = SaveImages()
+# s.setImages(5, "nature")
+# s.makeNewFolder()

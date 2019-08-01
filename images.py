@@ -30,7 +30,7 @@ class Images:
             return []
 
     @property
-    def getImages(self):
+    def fetchImages(self):
         data = Images.__response(self)
         time.sleep(1)
         for item in data:
@@ -40,6 +40,8 @@ class Images:
             else:
                 name = item["id"]
             self.__images.append({"img_url": img_url, "name": name})
+        print("> Images fetched successfully")
+        time.sleep(0.25)
         return self.__images
 
 # i = Images(3, "sea")
