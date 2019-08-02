@@ -71,7 +71,7 @@ if __name__ == "__main__":
             images = []
             path = ""
             while flag == 0:
-                time.sleep(0.25)
+                time.sleep(0.5)
                 path = input("> Enter the complete path of required folder: ")
                 if (os.path.isdir(path)):
                     contents = os.listdir(path)
@@ -88,11 +88,11 @@ if __name__ == "__main__":
                 if flag == 0:
                     break
                 elif flag == 1:
-                    time.sleep(0.25)
+                    time.sleep(1)
                     print(
                         "> Could not find that folder. Please try again by adding a valid folder path")
                 else:
-                    time.sleep(0.25)
+                    time.sleep(1)
                     print(
                         "> No images could be found inside the specified folder. Please try again by adding a folder path which contains some images")
                 flag = 0
